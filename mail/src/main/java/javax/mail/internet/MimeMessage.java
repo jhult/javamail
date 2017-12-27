@@ -1999,14 +1999,34 @@ public class MimeMessage extends Message implements MimePart {
 	headers.setHeader(name, value);	
     }
 
+	/**
+	 * Add this value to the existing values for this header_name.
+	 * Note that RFC 822 headers must contain only US-ASCII
+	 * characters, so a header that contains non US-ASCII characters
+	 * must have been encoded as per the rules of RFC 2047.
+	 *
+	 * @param	name 	header name
+	 * @param	value	header value
+	 * @see 	javax.mail.internet.MimeUtility
+	 * @exception	IllegalWriteException if the underlying
+	 *			implementation does not support modification
+	 * @exception	IllegalStateException if this message is
+	 *			obtained from a READ_ONLY folder.
+	 * @exception       MessagingException for other failures
+	 */
+	@Override
+	public void addHeader(String name, String value)
+                                throws MessagingException {
+		headers.addHeader(name, value);
+	}
+
     /**
-     * Add this value to the existing values for this header_name.
-     * Note that RFC 822 headers must contain only US-ASCII 
-     * characters, so a header that contains non US-ASCII characters 
+     * Add this list of values to the existing values.
+     * Note that RFC 822 headers must contain only US-ASCII
+     * characters, so a header that contains non US-ASCII characters
      * must have been encoded as per the rules of RFC 2047.
      *
-     * @param	name 	header name
-     * @param	value	header value
+     * @param	headersToAdd 	headers to add
      * @see 	javax.mail.internet.MimeUtility
      * @exception	IllegalWriteException if the underlying
      *			implementation does not support modification
@@ -2015,13 +2035,15 @@ public class MimeMessage extends Message implements MimePart {
      * @exception       MessagingException for other failures
      */
     @Override
-    public void addHeader(String name, String value)
+    public void addHeaders(List<Header> headersToAdd)
                                 throws MessagingException {
-	headers.addHeader(name, value);
+	headers.addHeaders(headersToAdd);
     }
 
     /**
      * Remove all headers with this name.
+		 *
+		 * @param name Header name to remove
      * @exception	IllegalWriteException if the underlying
      *			implementation does not support modification
      * @exception	IllegalStateException if this message is
@@ -2033,6 +2055,48 @@ public class MimeMessage extends Message implements MimePart {
                                 throws MessagingException {
 	headers.removeHeader(name);
     }
+
+	/**
+	 * Remove all headers matching this header.
+	 *
+	 * @param header Header to remove
+	 * @exception	IllegalWriteException if the underlying
+	 *			implementation does not support modification
+	 * @exception	IllegalStateException if this message is
+	 *			obtained from a READ_ONLY folder.
+	 * @exception       MessagingException for other failures
+	 */
+	@Override
+	public void removeHeader(Header header)
+                                throws MessagingException {
+		headers.removeHeader(header);
+	}
+
+	/**
+	 * Remove all headers matching headers in this list.
+	 * @exception	IllegalWriteException if the underlying
+	 *			implementation does not support modification
+	 * @exception	IllegalStateException if this message is
+	 *			obtained from a READ_ONLY folder.
+	 * @exception       MessagingException for other failures
+	 */
+	@Override
+	public void removeHeadersWithHeaderList(List<Header> headersToRemove) throws MessagingException	{
+		headers.removeHeadersWithHeaderList(headersToRemove);
+	}
+
+	/**
+	 * Remove all headers matching headers in this list.
+	 * @exception	IllegalWriteException if the underlying
+	 *			implementation does not support modification
+	 * @exception	IllegalStateException if this message is
+	 *			obtained from a READ_ONLY folder.
+	 * @exception       MessagingException for other failures
+	 */
+	@Override
+	public void removeHeadersWithStringList(List<String> headersToRemove) throws MessagingException	{
+		headers.removeHeadersWithStringList(headersToRemove);
+	}
 
     /**
      * Return all the headers from this Message as an enumeration

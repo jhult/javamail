@@ -1056,6 +1056,21 @@ public class MimeBodyPart extends BodyPart implements MimePart {
 	headers.addHeader(name, value);    
     }
 
+  /**
+   * Add this value to the existing values for this header_name.
+   * Note that RFC 822 headers must contain only US-ASCII
+   * characters, so a header that contains non US-ASCII characters
+   * must be encoded as per the rules of RFC 2047.
+   *
+   * @param   headersToAdd
+   * @see     javax.mail.internet.MimeUtility
+   */
+  @Override
+  public void addHeaders(List<Header> headersToAdd)
+      throws MessagingException {
+    headers.addHeaders(headersToAdd);
+  }
+
     /**
      * Remove all headers with this name.
      */
@@ -1063,6 +1078,30 @@ public class MimeBodyPart extends BodyPart implements MimePart {
     public void removeHeader(String name) throws MessagingException {
 	headers.removeHeader(name);
     }
+
+  /**
+   * Remove all headers matching this.
+   */
+  @Override
+  public void removeHeader(Header headerToRemove) throws MessagingException {
+    headers.removeHeader(headerToRemove);
+  }
+
+  /**
+   * Remove all headers with this name.
+   */
+  @Override
+  public void removeHeadersWithHeaderList(List<Header> headersToRemove) throws MessagingException {
+    headers.removeHeadersWithHeaderList(headersToRemove);
+  }
+
+  /**
+   * Remove all headers with this name.
+   */
+  @Override
+  public void removeHeadersWithStringList(List<String> headersToRemove) throws MessagingException {
+    headers.removeHeadersWithStringList(headersToRemove);
+  }
  
     /**
      * Return all the headers from this Message as an Enumeration of
