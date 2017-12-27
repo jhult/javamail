@@ -417,19 +417,50 @@ public interface Part {
 				throws MessagingException;
 
     /**
-     * Add this value to the existing values for this header_name.
+     * Set the value for this header. Replaces all existing
+     * header values with this new value.
      *
-     * @param header_name       the name of this header
-     * @param header_value      the value for this header
+     * @param header_to_set       the header to set
+     * @exception		IllegalWriteException if the underlying
+     *				implementation does not support modification
+     *				of existing values
+     * @exception		IllegalStateException if this Part is
+     *				obtained from a READ_ONLY folder
+     * @exception       	MessagingException for other failures
+     * @since 1.6.1
+     */
+    public void setHeader(Header header_to_set)
+        throws MessagingException;
+
+    /**
+     * Add this header to the existing values.
+     *
+     * @param header_to_add       the header to add
      * @exception		IllegalWriteException if the underlying 
      *				implementation does not support modification 
      *				of existing values
      * @exception		IllegalStateException if this Part is 
      *				obtained from a READ_ONLY folder
      * @exception       	MessagingException for other failures
+     * @since 1.6.1
+     */
+    public void addHeader(Header header_to_add)
+				throws MessagingException;
+
+    /**
+     * Add this value to the existing values for this header_name.
+     *
+     * @param header_name       the name of this header
+     * @param header_value      the value for this header
+     * @exception		IllegalWriteException if the underlying
+     *				implementation does not support modification
+     *				of existing values
+     * @exception		IllegalStateException if this Part is
+     *				obtained from a READ_ONLY folder
+     * @exception       	MessagingException for other failures
      */
     public void addHeader(String header_name, String header_value)
-				throws MessagingException;
+        throws MessagingException;
 
     /**
      * Adds this list of header values to the existing values.
@@ -441,6 +472,7 @@ public interface Part {
      * @exception		IllegalStateException if this Part is
      *				obtained from a READ_ONLY folder
      * @exception       	MessagingException for other failures
+     * @since 1.6.1
      */
     public void addHeaders(List<Header> headers)
         throws MessagingException;
@@ -470,7 +502,7 @@ public interface Part {
      * @exception		IllegalStateException if this Part is
      *				obtained from a READ_ONLY folder
      * @exception       	MessagingException for other failures
-     * @since 1.7
+     * @since 1.6.1
      */
     public void removeHeader(Header header_to_remove)
         throws MessagingException;
@@ -485,7 +517,7 @@ public interface Part {
      * @exception		IllegalStateException if this Part is
      *				obtained from a READ_ONLY folder
      * @exception       	MessagingException for other failures
-     * @since 1.7
+     * @since 1.6.1
      */
     public void removeHeadersWithStringList(List<String> headers_to_remove)
         throws MessagingException;
@@ -500,7 +532,7 @@ public interface Part {
      * @exception		IllegalStateException if this Part is
      *				obtained from a READ_ONLY folder
      * @exception       	MessagingException for other failures
-     * @since 1.7
+     * @since 1.6.1
      */
     public void removeHeadersWithHeaderList(List<Header> headers_to_remove)
         throws MessagingException;

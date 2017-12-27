@@ -1978,7 +1978,7 @@ public class MimeMessage extends Message implements MimePart {
     }
 
     /**
-     * Set the value for this header_name. Replaces all existing
+     * Set the value for this header name. Replaces all existing
      * header values with this new value. Note that RFC 822 headers
      * must contain only US-ASCII characters, so a header that
      * contains non US-ASCII characters must have been encoded by the
@@ -1998,6 +1998,28 @@ public class MimeMessage extends Message implements MimePart {
                                 throws MessagingException {
 	headers.setHeader(name, value);	
     }
+
+	/**
+	 * Set the value for this header. Replaces all existing
+	 * header values with this new value. Note that RFC 822 headers
+	 * must contain only US-ASCII characters, so a header that
+	 * contains non US-ASCII characters must have been encoded by the
+	 * caller as per the rules of RFC 2047.
+	 *
+	 * @param	headerToSet 	header to set
+	 * @see 	javax.mail.internet.MimeUtility
+	 * @exception	IllegalWriteException if the underlying
+	 *			implementation does not support modification
+	 * @exception	IllegalStateException if this message is
+	 *			obtained from a READ_ONLY folder.
+	 * @exception       MessagingException for other failures
+	 * @since 1.6.1
+	 */
+	@Override
+	public void setHeader(Header headerToSet)
+			throws MessagingException {
+		headers.setHeader(headerToSet);
+	}
 
 	/**
 	 * Add this value to the existing values for this header_name.
@@ -2020,6 +2042,27 @@ public class MimeMessage extends Message implements MimePart {
 		headers.addHeader(name, value);
 	}
 
+	/**
+	 * Add this value to the existing values for this header_name.
+	 * Note that RFC 822 headers must contain only US-ASCII
+	 * characters, so a header that contains non US-ASCII characters
+	 * must have been encoded as per the rules of RFC 2047.
+	 *
+	 * @param	headerToAdd
+	 * @see 	javax.mail.internet.MimeUtility
+	 * @exception	IllegalWriteException if the underlying
+	 *			implementation does not support modification
+	 * @exception	IllegalStateException if this message is
+	 *			obtained from a READ_ONLY folder.
+	 * @exception       MessagingException for other failures
+	 * @since 1.6.1
+	 */
+	@Override
+	public void addHeader(Header headerToAdd)
+			throws MessagingException {
+		headers.addHeader(headerToAdd);
+	}
+
     /**
      * Add this list of values to the existing values.
      * Note that RFC 822 headers must contain only US-ASCII
@@ -2033,6 +2076,7 @@ public class MimeMessage extends Message implements MimePart {
      * @exception	IllegalStateException if this message is
      *			obtained from a READ_ONLY folder.
      * @exception       MessagingException for other failures
+		 * @since 1.6.1
      */
     @Override
     public void addHeaders(List<Header> headersToAdd)
@@ -2065,6 +2109,7 @@ public class MimeMessage extends Message implements MimePart {
 	 * @exception	IllegalStateException if this message is
 	 *			obtained from a READ_ONLY folder.
 	 * @exception       MessagingException for other failures
+	 * @since 1.6.1
 	 */
 	@Override
 	public void removeHeader(Header header)
@@ -2079,6 +2124,7 @@ public class MimeMessage extends Message implements MimePart {
 	 * @exception	IllegalStateException if this message is
 	 *			obtained from a READ_ONLY folder.
 	 * @exception       MessagingException for other failures
+	 * @since 1.6.1
 	 */
 	@Override
 	public void removeHeadersWithHeaderList(List<Header> headersToRemove) throws MessagingException	{
@@ -2092,6 +2138,7 @@ public class MimeMessage extends Message implements MimePart {
 	 * @exception	IllegalStateException if this message is
 	 *			obtained from a READ_ONLY folder.
 	 * @exception       MessagingException for other failures
+	 * @since 1.6.1
 	 */
 	@Override
 	public void removeHeadersWithStringList(List<String> headersToRemove) throws MessagingException	{

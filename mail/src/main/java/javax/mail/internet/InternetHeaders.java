@@ -575,7 +575,7 @@ public class InternetHeaders {
 	 * Note that RFC822 headers can only contain US-ASCII characters
 	 *
 	 * @param	headerToSet	header to set
-	 * @since 1.7
+	 * @since 1.6.1
 	 */
 	public void setHeader(Header headerToSet) {
 		setHeader(headerToSet.getName(), headerToSet.getValue());
@@ -625,6 +625,7 @@ public class InternetHeaders {
 	 *
 	 * @param	headerToAdd	header to add
 	 * @see #addHeader(String, String)
+	 * @since 1.6.1
 	 */
 	public void addHeader(Header headerToAdd) {
 		addHeader(headerToAdd.getName(), headerToAdd.getValue());
@@ -635,6 +636,7 @@ public class InternetHeaders {
 	 *
 	 * @param	headersToAdd	list of headers to add
 	 * @see  #addHeader(Header)
+	 * @since 1.6.1
 	 */
 	public void addHeaders(List<Header> headersToAdd) {
 		for (Header header : headersToAdd) {
@@ -646,7 +648,7 @@ public class InternetHeaders {
 	 * Remove all header entries that match those in given list.
 	 *
 	 * @param	headersToRemove 	list of headers to remove
-	 * @since 1.7
+	 * @since 1.6.1
 	 */
 	public void removeHeadersWithStringList(List<String> headersToRemove) {
 		for (String header : headersToRemove) {
@@ -658,7 +660,7 @@ public class InternetHeaders {
 	 * Remove all header entries that match those in given list.
 	 *
 	 * @param	headersToRemove 	list of headers to remove
-	 * @since 1.7
+	 * @since 1.6.1
 	 */
 	public void removeHeadersWithHeaderList(List<Header> headersToRemove) {
 		for (Header header : headersToRemove) {
@@ -670,7 +672,7 @@ public class InternetHeaders {
 	 * Remove all header entries that match the given header.
 	 *
 	 * @param	headerToRemove 	header to remove
-	 * @since 1.7
+	 * @since 1.6.1
 	 */
 	public void removeHeader(Header headerToRemove) {
 			removeHeader(headerToRemove.getName());
